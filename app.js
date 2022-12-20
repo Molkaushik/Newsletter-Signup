@@ -2,6 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
+const dotEnv = require("dotenv");
+
+dotEnv.config();
 
 const app = express();
 
@@ -38,7 +41,7 @@ app.post("/", function(req, res){
 
     const options = {
         method: "POST",
-        auth: "anmol1:95f8211b51494b9e884ab9192a61b535-us8"
+        auth: "anmol1:" + process.env.API_KEY
     }
 
     const request = https.request(url, options, function(response){
@@ -64,9 +67,6 @@ app.post("/failure", function(req, res){
     res.redirect("/");
 })
 
-app.listen(process.env.PORT|| 3000, function(){
+app.listen(process.env.PORT || 3000, function(){
     console.log("Server is running on port 3000");
 })
-
-//95f8211b51494b9e884ab9192a61b535-us8
-//33a03d1d5e
